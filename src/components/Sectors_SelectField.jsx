@@ -24,7 +24,7 @@ const Sectors_SelectField = ({ selectedSectors, selectAction }) => {
             {/* background div to detect outside click */}
             {showAllSectors && <div className="fixed left-0 top-0 w-full h-full z-[9]"></div>}
 
-            <div onClick={(e) => e.stopPropagation()}
+            <div onClick={(e) => e.stopPropagation()} key={allSectors.length}
                 className={`absolute top-[110%] left-0 w-full h-44 bg-base-100 overflow-y-auto border border-primary rounded px-4 shadow-lg z-[10] transition origin-top ${showAllSectors ? 'scale-y-100' : 'scale-y-0'}`}>
                 {allSectors.map(sector => <div className="flex flex-col my-4 text-sm" key={sector._id}>
 

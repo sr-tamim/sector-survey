@@ -13,10 +13,14 @@ const EditSubmission = () => {
             .then(({ data }) => setSubmissionInfo(data[0]))
     }, [submissionId])
 
-    return (<section className="text-center max-w-sm mx-auto my-10">
-        <h3 className="text-primary font-semibold text-xl">Edit your submission</h3>
-        {submissionInfo?._id && <EditSubmission_Form submissionInfo={submissionInfo} />}
-        <div className="mt-8">
+    return (<section className="max-w-sm mx-auto my-10">
+        {!submissionInfo?._id ? <div
+            className="animate-pulse text-center text-primary my-20"
+        >Loading...</div> : <>
+            <h3 className="text-center text-primary font-semibold text-xl">Edit your submission</h3>
+            <EditSubmission_Form submissionInfo={submissionInfo} />
+        </>}
+        <div className="text-center mt-8">
             <Link to="/submissions" className="text-primary">View all submissions</Link>
         </div>
     </section>);
