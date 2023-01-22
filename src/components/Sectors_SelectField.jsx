@@ -1,20 +1,14 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { API_URL } from "../App";
 import Sectors_SelectOption from "./Sectors_SelectOption";
 
-const Sectors_SelectField = () => {
+const Sectors_SelectField = ({ selectedSectors, selectAction }) => {
     const [showAllSectors, setShowAllSectors] = useState(false)
     const [allSectors, setAllSectors] = useState([])
-    const [selectedSectors, setSelectedSectors] = useState([])
-    const selectAction = (selected, sector) => {
-        if (selected) {
-            setSelectedSectors(prev => [...prev, sector])
-        } else {
-            setSelectedSectors(prev => prev.filter(item => item.id !== sector.id))
-        }
-    }
+
     useEffect(() => {
-        axios.get('http://localhost:1212/sectors').then(({ data }) => setAllSectors(data))
+        axios.get(`${API_URL}/sectors`).then(({ data }) => setAllSectors(data))
             .catch(error => console.dir(error))
     }, [])
 
