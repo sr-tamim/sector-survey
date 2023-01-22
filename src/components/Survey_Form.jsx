@@ -1,4 +1,6 @@
+import axios from "axios";
 import { useCallback, useRef, useState } from "react"
+import { API_URL } from "../App";
 import Sectors_SelectField from "./Sectors_SelectField"
 
 
@@ -19,13 +21,31 @@ const Survey_Form = () => {
         const errors = {}
 
         if (!nameFieldRef.current.value) errors.Name = 'Write down your name first'
-
         if (!selectedSectors.length) errors.Sectors = 'Select at least one sector'
-
         if (!termCheckboxRef.current.checked) errors.TermsCheckbox = 'Agree to our terms to continue'
 
         setFormErrors(errors)
+        if (Object.keys(errors).length) return
+
+        const formValues = {
+            name: nameFieldRef.current.value,
+            sectors: selectedSectors,
+            timestamp: Date.now()
+        }
+        axios.post(`${API_URL}/users`, formValues)
+            .then(({ data }) => {
+                if (!data.insertedId) return
+                const prevSubmissions = localStorage.getItem('submissions')
+                const newSubmissions = prevSubmissions ? [...JSON.parse(prevSubmissions), data.insertedId] : [data.insertedId]
+                localStorage.setItem('submissions', JSON.stringify(newSubmissions))
+                alert('Submission successful')
+
+                nameFieldRef.current.value = ''
+                termCheckboxRef.current.checked = false
+                setSelectedSectors([])
+            })
     }, [selectedSectors])
+
     return (<div className="w-full grid gap-4 my-4">
         <div className="form-control w-full max-w-sm mx-auto">
             <label className="label">
@@ -54,7 +74,7 @@ const Survey_Form = () => {
             <div className="label-text-alt text-red-600 text-center">{formErrors?.TermsCheckbox}&nbsp;</div>
         </div>
         <button className="btn btn-primary w-full max-w-sm mx-auto"
-            onClick={submitForm}>Save</button>
+            onClick={submitForm}>Submit</button>
     </div>);
 };
 

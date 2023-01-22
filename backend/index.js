@@ -15,20 +15,26 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 app.listen(port, () => console.log(`http:localhost:${port}`));
 
-async function run() {
+async function start_server() {
     try {
         await client.connect();
         const database = client.db('sector_survey');
         const sectorsCollection = database.collection('sectors');
+        const usersCollection = database.collection('users');
 
         app.get('/sectors', async (req, res) => {
             const cursor = sectorsCollection.find({});
             const users = await cursor.toArray();
-            res.send(users);
+            res.json(users);
         });
-        app.post('/sectors', async (req, res) => {
+        /*app.post('/sectors', async (req, res) => {
             const newSector = req.body;
             const result = await sectorsCollection.insertOne(newSector);
+            res.json(result);
+        })*/
+        app.post('/users', async (req, res) => {
+            const newSubmission = req.body;
+            const result = await usersCollection.insertOne(newSubmission);
             res.json(result);
         })
     } finally {
@@ -36,4 +42,4 @@ async function run() {
     }
 }
 
-run().catch(console.dir);
+start_server().catch(console.dir);

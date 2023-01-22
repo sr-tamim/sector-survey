@@ -1,6 +1,6 @@
 import Survey_Form from "./components/Survey_Form"
 
-export const API_URL = import.meta.env.API_URL || 'https://sector-survey-production.up.railway.app'
+export const API_URL = import.meta.env.VITE_API_URL || 'https://sector-survey-production.up.railway.app'
 
 function App() {
 
