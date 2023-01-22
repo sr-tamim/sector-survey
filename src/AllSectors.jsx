@@ -1,3 +1,7 @@
+// sectors has been uploaded to database from here
+// data structure here is same as database
+// this variable is currently unused but kept it for reference
+
 const AllSectors = [
     {
         id: 1,
@@ -11,13 +15,13 @@ const AllSectors = [
                 id: 6,
                 categoryName: 'Food and Beverage',
                 sectors: [
-                    { id: 342, name: 'Bakery &amp; confectionery products' },
+                    { id: 342, name: 'Bakery & confectionery products' },
                     { id: 43, name: 'Beverages' },
-                    { id: 42, name: 'Fish &amp; fish products' },
-                    { id: 40, name: 'Meat &amp; meat products' },
-                    { id: 39, name: 'Milk &amp; dairy products' },
+                    { id: 42, name: 'Fish & fish products' },
+                    { id: 40, name: 'Meat & meat products' },
+                    { id: 39, name: 'Milk & dairy products' },
                     { id: 437, name: 'Other' },
-                    { id: 378, name: 'Sweets &amp; snack food' }
+                    { id: 378, name: 'Sweets & snack food' }
                 ]
             },
             {

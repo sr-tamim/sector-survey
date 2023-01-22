@@ -6,8 +6,11 @@ import Sectors_SelectField from "./Sectors_SelectField"
 
 
 const EditSubmission_Form = ({ submissionInfo }) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate() // react router function to navigate through pages
+
     const [selectedSectors, setSelectedSectors] = useState(submissionInfo?.sectors)
+
+    // below function is called whenever any sector option is clicked
     const selectAction = (selected, sector) => {
         if (selected) {
             setSelectedSectors(prev => [...prev, sector])
@@ -16,17 +19,20 @@ const EditSubmission_Form = ({ submissionInfo }) => {
         }
     }
 
-    const nameFieldRef = useRef()
-    const [formErrors, setFormErrors] = useState({})
+    const nameFieldRef = useRef() // name input
+
+    const [formErrors, setFormErrors] = useState({}) // error object for the form
     const submitForm = useCallback(() => {
         const errors = {}
 
+        // detect errors
         if (!nameFieldRef.current.value) errors.Name = 'Write down your name first'
         if (!selectedSectors.length) errors.Sectors = 'Select at least one sector'
 
-        setFormErrors(errors)
+        setFormErrors(errors) // set errors in the state
         if (Object.keys(errors).length) return
 
+        // upload edited values to the database
         const formValues = {
             _id: submissionInfo._id,
             name: nameFieldRef.current.value,
@@ -37,11 +43,12 @@ const EditSubmission_Form = ({ submissionInfo }) => {
             .then(({ data }) => {
                 if (!data.modifiedCount) return
                 alert('Submission edited successful')
-                navigate('/submissions')
+                navigate('/submissions') // go to 'submissions' page to view all submissions
             })
     }, [selectedSectors])
 
     return (<div className="w-full grid gap-4 my-4">
+        {/* --------- the form ---------- */}
         <div className="form-control w-full">
             <label className="label">
                 <span className="label-text">Name:</span>
@@ -54,6 +61,8 @@ const EditSubmission_Form = ({ submissionInfo }) => {
             <label className="label">
                 <span className="label-text">Sectors:</span>
             </label>
+
+            {/* custom multiselect input field developed by "SR Tamim" */}
             <Sectors_SelectField
                 selectedSectors={selectedSectors}
                 selectAction={selectAction} />
