@@ -47,7 +47,7 @@ const Survey_Form = () => {
     }, [selectedSectors])
 
     return (<div className="w-full grid gap-4 my-4">
-        <div className="form-control w-full max-w-sm mx-auto">
+        <div className="form-control w-full">
             <label className="label">
                 <span className="label-text">Name:</span>
             </label>
@@ -55,7 +55,7 @@ const Survey_Form = () => {
                 className="input input-primary" autoComplete="name" />
             <div className="label-text-alt text-red-600 mt-1">{formErrors?.Name}&nbsp;</div>
         </div>
-        <div className="w-full max-w-sm mx-auto">
+        <div className="w-full">
             <label className="label">
                 <span className="label-text">Sectors:</span>
             </label>
@@ -65,7 +65,7 @@ const Survey_Form = () => {
             <div className="label-text-alt text-red-600 mt-1">{formErrors?.Sectors}&nbsp;</div>
         </div>
 
-        <div className="form-control w-full max-w-sm mx-auto">
+        <div className="form-control w-full">
             <label className="label justify-center gap-4 cursor-pointer">
                 <input type="checkbox" ref={termCheckboxRef}
                     className="checkbox checkbox-primary" />
@@ -73,7 +73,7 @@ const Survey_Form = () => {
             </label>
             <div className="label-text-alt text-red-600 text-center">{formErrors?.TermsCheckbox}&nbsp;</div>
         </div>
-        <button className="btn btn-primary w-full max-w-sm mx-auto"
+        <button className="btn btn-primary w-full"
             onClick={submitForm}>Submit</button>
     </div>);
 };
