@@ -35,8 +35,13 @@ const Submissions = () => {
                                 {item.sectors.map(sector => <div key={sector.id}
                                     className="badge badge-primary badge-outline">{sector.name}</div>)}
                             </div>
-                            <div className="card-actions justify-end mt-1">
-                                <div className="text-sm text-gray-500">Submitted at {new Date(item.timestamp).toLocaleString()}</div>
+                            <div className="text-xs text-gray-500 flex flex-col items-end mt-1">
+                                <div>
+                                    Submitted at {new Date(item.timestamp).toLocaleString()}
+                                </div>
+                                {item.editedAt && <div>
+                                    Edited at {new Date(item.editedAt).toLocaleString()}
+                                </div>}
                             </div>
                         </div>
                     </Link>)}
