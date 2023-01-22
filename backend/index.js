@@ -1,14 +1,14 @@
-const express = require('express');
-const { MongoClient } = require('mongodb');
-const cors = require('cors');
+import express, { json } from 'express';
+import { MongoClient } from 'mongodb';
+import cors from 'cors';
 require('dotenv').config();
-const ObjectId = require('mongodb').ObjectId;
+import { ObjectId } from 'mongodb';
 const app = express();
 const port = process.env.PORT || 1212;
 
 // middleware
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.bdnuvui.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
