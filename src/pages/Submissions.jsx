@@ -19,7 +19,7 @@ const Submissions = () => {
             : !submissions.length ? <div className="animate-pulse text-center my-20"
             >Loading...</div> : <>
                 <div className="grid gap-6 px-2">
-                    <h3 className="mt-10 text-xl font-semibold text-primary">My Submissions</h3>
+                    <h3 className="mt-10 text-xl font-semibold text-primary text-center">My Submissions</h3>
                     {submissions.map(item => <Link key={item._id}
                         to={`/submissions/${item._id}`}
                         className="card bg-base-100 shadow-lg">

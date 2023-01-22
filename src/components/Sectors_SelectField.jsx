@@ -15,7 +15,7 @@ const Sectors_SelectField = ({ selectedSectors, selectAction }) => {
     return (
         <div tabIndex={0} onClick={() => setShowAllSectors(prev => !prev)}
             className="group relative w-full min-h-[3rem] flex items-center gap-2 flex-wrap border border-primary rounded-lg px-4 py-2 focus:outline outline-2 outline-primary outline-offset-2">
-            {!selectedSectors.length ? <span className="text-gray-400">Select</span>
+            {!selectedSectors.length ? <span className="text-gray-400 cursor-default">Select</span>
                 : selectedSectors.map(sector => <div key={sector.id}
                     className="badge badge-sm badge-primary">
                     {sector.name}

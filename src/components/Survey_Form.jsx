@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useCallback, useRef, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { API_URL } from "../App";
 import Sectors_SelectField from "./Sectors_SelectField"
 
 
 const Survey_Form = () => {
+    const navigate = useNavigate()
     const [selectedSectors, setSelectedSectors] = useState([])
     const selectAction = (selected, sector) => {
         if (selected) {
@@ -39,10 +41,7 @@ const Survey_Form = () => {
                 const newSubmissions = prevSubmissions ? [...JSON.parse(prevSubmissions), data.insertedId] : [data.insertedId]
                 localStorage.setItem('submissions', JSON.stringify(newSubmissions))
                 alert('Submission successful')
-
-                nameFieldRef.current.value = ''
-                termCheckboxRef.current.checked = false
-                setSelectedSectors([])
+                navigate('/submissions')
             })
     }, [selectedSectors])
 
