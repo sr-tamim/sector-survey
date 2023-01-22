@@ -37,6 +37,13 @@ async function start_server() {
             const result = await usersCollection.insertOne(newSubmission);
             res.json(result);
         })
+        app.post('/users/find', async (req, res) => {
+            const ids = req.body.map(id => ObjectId(id));
+            const query = { _id: { '$in': ids } }
+            const cursor = usersCollection.find(query)
+            const result = await cursor.toArray()
+            res.json(result);
+        })
     } finally {
         // await client.close() 
     }
