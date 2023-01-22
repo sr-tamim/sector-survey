@@ -44,6 +44,14 @@ async function start_server() {
             const result = await cursor.toArray()
             res.json(result);
         })
+        app.put('/users', async (req, res) => {
+            const newInfo = req.body;
+            const query = { _id: ObjectId(newInfo._id) }
+            delete newInfo._id
+            const cursor = { '$set': newInfo }
+            const result = await usersCollection.updateOne(query, cursor);
+            res.json(result);
+        })
     } finally {
         // await client.close() 
     }

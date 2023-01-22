@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import EditSubmission from "./pages/EditSubmission"
 import Homepage from "./pages/Homepage"
 import Submissions from "./pages/Submissions"
 
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/submissions" element={<Submissions />} />
+          <Route path="/submissions/:id" element={<EditSubmission />} />
         </Routes>
       </BrowserRouter>
     </main>
